@@ -1,0 +1,20 @@
+#%RAML 1.0
+title: jersey-user-demo API
+description:
+version: V2
+baseUri: http://127.0.0.1:8080/jersey-user-demo
+/users:
+post:
+ description:查询用户是否存在，用户密码是否正确
+ body：
+    application/json:
+    properties:
+        userAccount：string
+        password：string
+    response：
+      200：
+      body：
+           application/json:
+           properties:
+              msg:string
+
