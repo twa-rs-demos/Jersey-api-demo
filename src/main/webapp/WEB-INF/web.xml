@@ -7,7 +7,7 @@
          version='2.5'>
 
     <servlet>
-        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-name>jersey-user-demo-serlvet</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 
         <init-param>
@@ -19,7 +19,7 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-name>jersey-user-demo-serlvet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
