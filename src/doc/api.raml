@@ -1,20 +1,64 @@
 #%RAML 1.0
 title: jersey-user-demo API
-description:
-version: V2
+version: V1
 baseUri: http://127.0.0.1:8080/jersey-user-demo
-/users:
-post:
- description:查询用户是否存在，用户密码是否正确
- body：
-    application/json:
-    properties:
-        userAccount：string
-        password：string
-    response：
-      200：
-      body：
-           application/json:
-           properties:
-              msg:string
+/user:
+  description： 通过不同方式查找用户
+  /mobilePhone/{mobilePhone}:
+    description：|
+      通过电话号码，获取用户信息，
+      如果查找的用户不存在，则返回404，NOT_FOUND
+    get:
+      description:通过电话号码，获取用户信息 get方式
+      queryParameters:
+        mobilePhone：
+          type: string
+          description: 用户电话号码
+          example: 17791378995
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                   id："1",
+                   mobilePhone："17791378995",
+                   email: "357283632@qq.com",
+                   password: "123456"
+                }
+        404:
+          body:
+            application/json:
+              example: |
+                {"message": "<<resourcePathName|!singularize>> not found" }
+  /emial/{email}:
+    description：|
+          通过邮箱，获取用户信息，
+          如果查找的用户不存在，则返回404，NOT_FOUND
+        get:
+          description:通过邮箱，获取用户信息 get方式
+          queryParameters:
+            eamil：
+              type: string
+              description: 用户邮箱
+              example: "357283632@qq.com"
+              required: true
+          responses:
+            200:
+              body:
+                application/json:
+                  example: |
+                    {
+                       id："1",
+                       mobilePhone："17791378995",
+                       email: "357283632@qq.com",
+                       password: "123456"
+                    }
+            404:
+              body:
+                application/json:
+                  example: |
+                    {"message": "<<resourcePathName|!singularize>> not found" }
+
 
