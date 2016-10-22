@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import com.thoughtworks.twars.bean.User;
 
@@ -47,12 +48,29 @@ public class UserService {
         return Response.status(Response.Status.OK).entity(map).build();
     }
 
-//    @GET
-//    @Path("/email/{param}")
-//    @ApiResponses(value = {@ApiResponse(code=200, message = "get one user successful"),
-//            @ApiResponse(code = 404, message = "get one user failed")})
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public
+    @GET
+    @Path("/email/{param}")
+    @ApiResponses(value = {@ApiResponse(code=200, message = "get one user successful"),
+            @ApiResponse(code = 404, message = "get one user failed")})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserByEmail(
+        @ApiParam(name = "email", value = "String" ,required = true)
+        @PathParam("param") String email){
+            User user = userMapper.getUserByEmail(email);
+
+
+        if(user == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("id",user.getId());
+        map.put("mobilePhone", user.getMobilePhone());
+        map.put("email", user.getEmail());
+        map.put("password", user.getPassWord());
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
 
 
 
