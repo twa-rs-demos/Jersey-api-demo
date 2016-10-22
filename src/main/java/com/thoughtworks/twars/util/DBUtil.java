@@ -10,25 +10,35 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class DBUtil {
-    public static SqlSessionFactory  sqlSessionFactory = null;
-        static {
+    public static SqlSessionManager getSession() {
+        String resource = "mybatis/mybatis-config.xml";
+        SqlSessionManager session = null;
+
         try {
-            //将配置文件读取到输入流中
-            String resource = "mybatis/mybatis-config.xml";
-            InputStream reader = Resources.getResourceAsStream(resource);
-            //创建SqlSessionFactory对象，解析reader对象中的内容,利用反射创建SqlSessionFactory对象.
-            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+            InputStream is = Resources.getResourceAsStream(resource);
+            SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+            SqlSessionFactory sqlSessionFactory = builder.build(is);
+            session = SqlSessionManager.newInstance(sqlSessionFactory);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public static SqlSessionManager getSession(){
-        return SqlSessionManager.newInstance(sqlSessionFactory);
-    }  //开启数据库并且获得用户身份
 
-    public static void closeSession(SqlSession session){
-        if(session != null){
-            session.close();  //数据库可以接受访问的人数是有限的，因此每次访问完数据库必须断开和数据库的链接，关闭数据库
+        return session;
+    }
+
+    public static SqlSessionManager getSession(String environment) {
+        String resource = "mybatis/mybatis-config.xml";
+        SqlSessionManager session = null;
+
+        try {
+            InputStream is = Resources.getResourceAsStream(resource);
+            SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+            SqlSessionFactory sqlSessionFactory = builder.build(is, environment);
+            session = SqlSessionManager.newInstance(sqlSessionFactory);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        return session;
     }
 }
