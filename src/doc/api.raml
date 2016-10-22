@@ -9,7 +9,7 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
       通过电话号码，获取用户信息，
       如果查找的用户不存在，则返回404，NOT_FOUND
     get:
-      description:通过电话号码，获取用户信息 get方式
+      description: 通过电话号码，获取用户信息 get方式
       queryParameters:
         mobilePhone：
           type: string
@@ -37,7 +37,7 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
           通过邮箱，获取用户信息，
           如果查找的用户不存在，则返回404，NOT_FOUND
         get:
-          description:通过邮箱，获取用户信息 get方式
+          description: 通过邮箱，获取用户信息 get方式
           queryParameters:
             eamil：
               type: string
@@ -60,5 +60,7 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
                 application/json:
                   example: |
                     {"message": "not found" }
+                    
+                    
 
 
