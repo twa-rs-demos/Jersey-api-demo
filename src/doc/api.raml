@@ -31,7 +31,7 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
           body:
             application/json:
               example: |
-                {"message": "<<resourcePathName|!singularize>> not found" }
+                {"message": "not found" }
   /emial/{email}:
     description：|
           通过邮箱，获取用户信息，
@@ -59,6 +59,6 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
               body:
                 application/json:
                   example: |
-                    {"message": "<<resourcePathName|!singularize>> not found" }
+                    {"message": "not found" }
 
 
