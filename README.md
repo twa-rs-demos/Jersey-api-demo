@@ -19,7 +19,7 @@ gradle -v
 
 4. 进入到该项目的根目录下
 
-5. 执行 ·docker exec -i [容器名或者容器ID] mysql -uroot -p[mysql密码] < database/v1_Create_database.sql·
+5. 执行 ·docker exec -i [容器名或者容器ID] mysql -uroot -p[mysql密码] < database/initDatabase.sql·
 *注：database/v1_Create_database.sql是项目中的sql文件，其中是对数据库的操作
 显示
 id	mobilePhone	email	password
