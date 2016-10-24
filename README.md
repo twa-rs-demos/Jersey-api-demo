@@ -13,17 +13,14 @@ gradle -v
 如果没有执行： 
 `docker pull mysql`
 如果有直接执行
-
-- 
+ 
 ```
 docker run -p 3308:3306 --name [容器名] -e MYSQL_ROOT_PASSWORD=[设置mysql密码] -d mysql:latest
 ```
 *注：mysql:latest是你下载的镜像名，若不知道，可执行`docker images`查看镜像版本号*
 在3308端口运行mysql
 
-- 进入到该项目的根目录下
-
--  
+- 进入到该项目的根目录下  
 ```
 docker exec -i [容器名或者容器ID] mysql -uroot -p[mysql密码] < src/main/resources/db/migration/initDatabase.sql
 ```
