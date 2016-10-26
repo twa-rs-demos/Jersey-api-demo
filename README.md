@@ -20,27 +20,21 @@ docker run -p 3308:3306 --name [容器名] -e MYSQL_ROOT_PASSWORD=[设置mysql�
 *注：mysql:latest是你下载的镜像名，若不知道，可执行`docker images`查看镜像版本号*
 在3308端口运行mysql
 
-- 进入到该项目的根目录下  
-```
-docker exec -i [容器名或者容器ID] mysql -uroot -p[mysql密码] < src/main/resources/db/migration/initDatabase.sql
-```
-*注：database/v1_Create_database.sql是项目中的sql文件，其中是对数据库的操作*
-显示
-```
-id	mobilePhone	email	password
-1	18829290576	565678150@qq.com	123456789
-2	17791378995	357283632@qq.com	123456789
-表示数据库写入成功
-```
-
 - 打开/src/main/resources.config.properties文件
 将`password=123456`的password改成你给mysql设置的密码
 
-- 在项目根目录下执行
-`gradle build` 
-安装包
+- 打开build.gradle文件
+将51行的`password=123456`改成你给mysql设置的密码
 
 - 在项目根目录下执行
+ ```
+ gradle build
+ gradle flywayMigrate -i
+ ```
+
+- 在项目根目录下执行
+`gradle test`
+测试数据
 `gradle jettyrun` 
 运行项目
 

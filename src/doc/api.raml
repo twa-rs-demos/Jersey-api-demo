@@ -32,14 +32,14 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
             application/json:
               example: |
                 {"message": "not found" }
-  /emial/{email}:
+  /email/{email}:
     description：|
           通过邮箱，获取用户信息，
           如果查找的用户不存在，则返回404，NOT_FOUND
         get:
           description: 通过邮箱，获取用户信息 get方式
           queryParameters:
-            eamil：
+            email：
               type: string
               description: 用户邮箱
               example: "357283632@qq.com"
