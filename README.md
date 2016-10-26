@@ -20,10 +20,11 @@ docker run -p 3308:3306 --name [容器名] -e MYSQL_ROOT_PASSWORD=[设置mysql�
 *注：mysql:latest是你下载的镜像名，若不知道，可执行`docker images`查看镜像版本号*
 在3308端口运行mysql
 
-- 打开/src/main/resources.config.properties文件
+- mybatis配置:打开/src/main/resources.config.properties文件
 将`password=123456`的password改成你给mysql设置的密码
 
-- 打开build.gradle文件
+
+- flywayMigrate配置:打开build.gradle文件
 将51行的`password=123456`改成你给mysql设置的密码
 
 - 在项目根目录下执行
