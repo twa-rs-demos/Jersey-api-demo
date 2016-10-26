@@ -4,7 +4,7 @@ public class User {
     private String mobilePhone;
     private Integer id;
     private String email;
-    private String passWord;
+    private String password;
 
 
 
@@ -20,8 +20,8 @@ public class User {
         return email;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
     public User setMobilePhone(String mobilePhone) {
@@ -39,8 +39,8 @@ public class User {
         return this;
     }
 
-    public User setPassWord(String passWord) {
-        this.passWord = passWord;
+    public User setPassword(String password) {
+        this.password = password;
         return this;
     }
 }

@@ -13,10 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+
 import com.thoughtworks.twars.bean.User;
 
 @Path("user")
@@ -43,7 +41,7 @@ public class UserService {
         map.put("id", user.getId());
         map.put("mobilePhone", user.getMobilePhone());
         map.put("email", user.getEmail());
-        map.put("password", user.getPassWord());
+        map.put("password", user.getPassword());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
@@ -67,7 +65,7 @@ public class UserService {
         map.put("id",user.getId());
         map.put("mobilePhone", user.getMobilePhone());
         map.put("email", user.getEmail());
-        map.put("password", user.getPassWord());
+        map.put("password", user.getPassword());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
