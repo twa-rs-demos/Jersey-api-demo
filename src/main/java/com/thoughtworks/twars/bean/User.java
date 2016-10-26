@@ -6,6 +6,8 @@ public class User {
     private String email;
     private String passWord;
 
+
+
     public String getMobilePhone() {
         return mobilePhone;
     }
@@ -22,19 +24,23 @@ public class User {
         return passWord;
     }
 
-    public void setMobilePhone(String mobilePhone) {
+    public User setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
+        return this;
     }
 
-    public void setId(Integer id) {
+    public User setId(Integer id) {
         this.id = id;
+        return this;
     }
 
-    public void setEmail(String email) {
+    public User setEmail(String email) {
         this.email = email;
+        return this;
     }
 
-    public void setPassWord(String passWord) {
+    public User setPassWord(String passWord) {
         this.passWord = passWord;
+        return this;
     }
 }
