@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS `UserCenter`;
+CREATE DATABASE `UserCenter` CHARACTER SET utf8 COLLATE utf8_general_ci;
