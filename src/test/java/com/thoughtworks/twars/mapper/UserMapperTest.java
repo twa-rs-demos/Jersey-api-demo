@@ -4,8 +4,6 @@ import com.thoughtworks.twars.bean.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 
 public class UserMapperTest extends TestBase{
@@ -43,7 +41,8 @@ public class UserMapperTest extends TestBase{
                 .setPassword("12345678");
         userMapper.insertUser(user);
 
-        assertThat(user.getId(),is(1));
+        //// FIXME: 16-10-27 no such method of assertThat
+        assertEquals(user.getId().intValue(),1);
     }
 
 }

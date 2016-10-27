@@ -49,8 +49,6 @@ public class UserServiceTest extends TestBase {
 //        assertThat(response.getEntity());
     }
 
-
-
     @Test
     public void should_return_one_user_by_email(){
         when(userMapper.getUserByEmail("565678150@qq.com")).thenReturn(user);
