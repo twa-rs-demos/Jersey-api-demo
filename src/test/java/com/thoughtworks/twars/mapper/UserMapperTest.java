@@ -4,6 +4,8 @@ import com.thoughtworks.twars.bean.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 
 public class UserMapperTest extends TestBase{
@@ -16,33 +18,39 @@ public class UserMapperTest extends TestBase{
     }
 
     @Test
+    public void should_return_user_by_id() throws Exception {
+        User user = userMapper.getUserById(1);
+        assertThat(user.getMobilePhone(), is("18798037893"));
+    }
+
+    @Test
     public void should_return_one_user_by_given_user_mobilePhone() throws Exception{
-        User user1 = userMapper.getUserByMobilePhone("18829290576");
-        assertEquals("565678150@qq.com",user1.getEmail());
-        assertEquals(new Integer(1),user1.getId());
-        assertEquals("18829290576",user1.getMobilePhone());
-        assertEquals("123456789",user1.getPassword());
+        User user1 = userMapper.getUserByMobilePhone("18798037893");
+        assertEquals("test@163.com",user1.getEmail());
+        assertEquals(1,user1.getId());
+        assertEquals("18798037893",user1.getMobilePhone());
+        assertEquals("550e1bafe077ff0b0b67f4e32f29d751",user1.getPassword());
     }
 
     @Test
     public void should_return_one_user_by_given_user_email() throws Exception{
-        User user2 = userMapper.getUserByEmail("565678150@qq.com");
-        assertEquals("565678150@qq.com",user2.getEmail());
-        assertEquals(new Integer(1),user2.getId());
-        assertEquals("18829290576",user2.getMobilePhone());
-        assertEquals("123456789",user2.getPassword());
+        User user2 = userMapper.getUserByEmail("test@163.com");
+        assertEquals("test@163.com",user2.getEmail());
+        assertEquals(1,user2.getId());
+        assertEquals("18798037893",user2.getMobilePhone());
+        assertEquals("550e1bafe077ff0b0b67f4e32f29d751",user2.getPassword());
     }
 
     @Test
     public void should_insert_an_user() throws Exception{
-        User user = new User()
-                .setEmail("474101205@qq.com")
-                .setMobilePhone("18392571954")
-                .setPassword("12345678");
+        User user = new User();
+        user.setEmail("547080843@qq.com");
+        user.setMobilePhone("18392571954");
+        user.setPassword("1234567");
         userMapper.insertUser(user);
 
         //// FIXME: 16-10-27 no such method of assertThat
-        assertEquals(user.getId().intValue(),1);
+        assertEquals(user.getId(),7);
     }
 
 }

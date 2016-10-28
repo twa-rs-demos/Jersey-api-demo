@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import com.thoughtworks.twars.bean.User;
 
@@ -21,6 +22,30 @@ import com.thoughtworks.twars.bean.User;
 public class UserService {
     @Inject
     private UserMapper userMapper;
+
+    @GET
+    @Path("/{param}")
+    @ApiResponses(value = {@ApiResponse(code = 200,message = "get one user successfully"),
+            @ApiResponse(code = 404,message = "get one user by id failed")})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUser(
+            @ApiParam(name = "id",value = "int",required = true)
+            @PathParam("param") int id){
+        System.out.println("---------------");
+        User user = userMapper.getUserById(id);
+        if(user == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", user.getId());
+        map.put("email", user.getEmail());
+        map.put("mobilePhone", user.getMobilePhone());
+        map.put("role", user.getRole());
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
 
     @GET
     @Path("/mobilePhone/{param}")
@@ -42,6 +67,7 @@ public class UserService {
         map.put("mobilePhone", user.getMobilePhone());
         map.put("email", user.getEmail());
         map.put("password", user.getPassword());
+        map.put("role", user.getRole());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
@@ -66,6 +92,7 @@ public class UserService {
         map.put("mobilePhone", user.getMobilePhone());
         map.put("email", user.getEmail());
         map.put("password", user.getPassword());
+        map.put("role", user.getRole());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }

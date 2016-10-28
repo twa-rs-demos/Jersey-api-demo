@@ -1,46 +1,55 @@
 package com.thoughtworks.twars.bean;
 
 public class User {
+    private int id;
     private String mobilePhone;
-    private Integer id;
     private String email;
     private String password;
+    private String role;
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMobilePhone() {
         return mobilePhone;
     }
 
-    public Integer getId() {
-        return id;
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public User setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-        return this;
-    }
-
-    public User setId(Integer id) {
-        this.id = id;
-        return this;
-    }
-
-    public User setEmail(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public User setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "id:" + this.id + ", email:" + this.email;
     }
 }

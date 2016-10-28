@@ -11,9 +11,13 @@
         select * from users where email = #{email}
     </select>
 
+    <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
+        select * from users where id = #{id}
+    </select>
+
     <insert id="insertUser" parameterType="com.thoughtworks.twars.bean.User" useGeneratedKeys="true" keyProperty="id">
-        insert into users(email,mobilePhone,password)
-        values (#{email},#{mobilePhone},MD5(#{password}))
+        insert into users(email,mobilePhone,password,createDate)
+        values (#{email},#{mobilePhone},MD5(#{password}),UNIX_TIMESTAMP())
     </insert>
 
 </mapper>
