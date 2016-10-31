@@ -25,50 +25,64 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
 /user:
   description： 通过不同方式查找用户
   /{id}:
-      get:
-        responses:
-          200:
-            body:
-              application/json:
-                properties:
-                  id: integer
-                  email: string
-                  mobilePhone: string
-
-  /detail:
-        get:
-          description: 获取用户信息
+    get:
+      responses:
+        200:
           body:
             application/json:
               properties:
-                userId: integer
-                school: string
-                name: string
-                gender: string
-                major: string
-                degree: string
-                birthday: integer
+                id: integer
                 email: string
                 mobilePhone: string
-        put:
-          description: 提交用户的详细信息
+    /detail:
+       get:
+         description: 获取用户信息
+           body:
+             application/json:
+               properties:
+                 userId: integer
+                 school: string
+                 name: string
+                 gender: string
+                 major: string
+                 degree: string
+                 birthday: integer
+                 email: string
+                 mobilePhone: string
+       put:
+         description: 提交用户的详细信息
+         body:
+           application/json:
+             properties:
+               userId: integer
+               school: string
+               name: string
+               gender: string
+               major: string
+               degree: string
+         responses:
+           200:
+             body:
+               application/json:
+                 properties:
+                   userInfo:
+                     properties:
+                       uri: string
+    /password:
+       put:
+        description: 修改用户密码
           body:
             application/json:
               properties:
-                userId: integer
-                school: string
-                name: string
-                gender: string
-                major: string
-                degree: string
+                oldPassword: string
+                password: string
           responses:
             200:
               body:
                 application/json:
                   properties:
-                    userInfo:
-                      properties:
-                        uri: string
+                  uri: string
+
 
   /mobilePhone/{mobilePhone}:
     description：|

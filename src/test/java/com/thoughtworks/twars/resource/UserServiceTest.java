@@ -10,10 +10,12 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -72,6 +74,41 @@ public class UserServiceTest extends TestBase {
     }
 
     @Test
+    public void should_insert_user_detail() throws Exception {
+        UserDetail insertUserDetail = new UserDetail();
+
+        insertUserDetail.setUserId(18);
+        insertUserDetail.setDegree("benke");
+        insertUserDetail.setGender("F");
+        insertUserDetail.setMajor("cs");
+        insertUserDetail.setName("purple");
+        insertUserDetail.setSchool("shannxi");
+        insertUserDetail.setSchoolProvince("陕西");
+        insertUserDetail.setSchoolCity("西安");
+        insertUserDetail.setEntranceYear("2016");
+
+        Entity<UserDetail> entityUserDetail = Entity.entity(insertUserDetail,
+                MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/18/detail").request().put
+                (entityUserDetail);
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+        assertThat(result.get("uri"), is("userDetail/18"));
+    }
+
+    @Test
+    public void should_return_404_when_get_no_detail() throws Exception {
+
+        when(userMapper.getUserDetailById(anyInt())).thenReturn(null);
+
+        Response response = target(basePath + "/99/detail").request().get();
+
+        assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
     public void should_return_user_detail_by_user_id() throws Exception {
 
         UserDetail theDetail = mock(UserDetail.class);
@@ -126,5 +163,21 @@ public class UserServiceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         assertThat(result.get("uri"), is("userDetail/2"));
 
+    }
+
+    @Test
+    public void should_change_user_password() throws Exception {
+        Map userMap = new HashMap<String, String>();
+
+        userMap.put("oldPassword", "25d55ad283aa400af464c76d713c07ad");
+        userMap.put("password", "123");
+
+        when(userMapper.updatePassword(1, "25d55ad283aa400af464c76d713c07ad", "123")).thenReturn(1);
+
+        Entity entity = Entity.entity(userMap, MediaType.APPLICATION_JSON);
+
+        Response response = target(basePath + "/1/password").request().put(entity);
+
+        assertThat(response.getStatus(), is(200));
     }
 }

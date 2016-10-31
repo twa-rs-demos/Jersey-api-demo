@@ -47,4 +47,8 @@
         values (#{email},#{mobilePhone},MD5(#{password}),UNIX_TIMESTAMP())
     </insert>
 
+    <update id="updatePassword">
+        UPDATE users SET password=MD5(#{password}) WHERE id = #{id} AND password=MD5(#{oldPassword});
+    </update>
+
 </mapper>

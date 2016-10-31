@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.thoughtworks.twars.bean.User;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 
 @Path("user")
 public class UserService {
@@ -141,5 +143,34 @@ public class UserService {
         map.put("uri", "userDetail/" + userDetail.getUserId());
 
         return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+    @PUT
+    @Path("/{param}/password")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "userId", value = "int", required = true),
+            @ApiImplicitParam(name = "userPasswordMap",
+                    value = "include all info when update user password", required = true)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "update user password successful"),
+            @ApiResponse(code = 400, message = "update user password failed")})
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUserPassword(
+            @PathParam("param") int userId,
+            Map userPasswordMap
+    ) {
+        String oldPassword = (String) userPasswordMap.get("oldPassword");
+        String password = (String) userPasswordMap.get("password");
+
+        int result = userMapper
+                .updatePassword(userId, oldPassword, password);
+
+        if (1 == result) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("uri", "users/" + userId);
+
+            return Response.status(Response.Status.OK).entity(map).build();
+        }
+
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

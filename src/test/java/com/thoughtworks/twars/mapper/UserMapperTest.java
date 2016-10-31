@@ -89,4 +89,19 @@ public class UserMapperTest extends TestBase{
         assertThat(userDetail.getEntranceYear(), is("2015"));
     }
 
+    @Test
+    public void should_update_password() throws Exception {
+
+        int id = 1;
+        String oldPassword = "25d55ad283aa400af464c76d713c07ad";
+        String password = "123";
+
+        int result = userMapper.updatePassword(id, oldPassword, password);
+
+        User resultUser = userMapper.getUserById(1);
+
+        assertThat(result, is(1));
+        assertThat(resultUser.getPassword(), is("202cb962ac59075b964b07152d234b70"));
+    }
+
 }
