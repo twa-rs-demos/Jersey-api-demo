@@ -25,20 +25,20 @@ public class UserMapperTest extends TestBase{
 
     @Test
     public void should_return_one_user_by_given_user_mobilePhone() throws Exception{
-        User user1 = userMapper.getUserByMobilePhone("18798037893");
-        assertEquals("test@163.com",user1.getEmail());
-        assertEquals(1,user1.getId());
-        assertEquals("18798037893",user1.getMobilePhone());
-        assertEquals("550e1bafe077ff0b0b67f4e32f29d751",user1.getPassword());
+        User user = userMapper.getUserByMobilePhone("18798037893");
+        assertThat(user.getEmail(),is("test@163.com"));
+        assertThat(user.getId(),is(1));
+        assertThat(user.getMobilePhone(),is("18798037893"));
+        assertThat(user.getPassword(),is("550e1bafe077ff0b0b67f4e32f29d751"));
     }
 
     @Test
     public void should_return_one_user_by_given_user_email() throws Exception{
-        User user2 = userMapper.getUserByEmail("test@163.com");
-        assertEquals("test@163.com",user2.getEmail());
-        assertEquals(1,user2.getId());
-        assertEquals("18798037893",user2.getMobilePhone());
-        assertEquals("550e1bafe077ff0b0b67f4e32f29d751",user2.getPassword());
+        User user = userMapper.getUserByEmail("test@163.com");
+        assertThat(user.getEmail(),is("test@163.com"));
+        assertThat(user.getId(),is(1));
+        assertThat(user.getMobilePhone(),is("18798037893"));
+        assertThat(user.getPassword(),is("550e1bafe077ff0b0b67f4e32f29d751"));
     }
 
     @Test
@@ -49,8 +49,7 @@ public class UserMapperTest extends TestBase{
         user.setPassword("1234567");
         userMapper.insertUser(user);
 
-        assertThat(user.getId(), is(Integer.valueOf(7)));
-        assertEquals(user.getId(),7);
+        assertThat(user.getId(), is(7));
     }
 
 }
