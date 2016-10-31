@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
+import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,6 +51,21 @@ public class UserMapperTest extends TestBase{
         userMapper.insertUser(user);
 
         assertThat(user.getId(), is(7));
+    }
+
+    @Test
+    public void should_return_user_detail_by_id() throws Exception {
+        UserDetail detail = userMapper.getUserDetailById(1);
+
+        assertThat(detail.getUserId(), is(1));
+        assertThat(detail.getSchool(), is("思沃学院"));
+        assertThat(detail.getName(), is("测试一"));
+        assertThat(detail.getMajor(), is("计算机"));
+        assertThat(detail.getDegree(), is("本科"));
+        assertThat(detail.getGender(), is("F"));
+        assertThat(detail.getSchoolProvince(), is("陕西"));
+        assertThat(detail.getSchoolCity(), is("西安"));
+        assertThat(detail.getEntranceYear(),is("2016"));
     }
 
 }
