@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import com.thoughtworks.twars.bean.User;
 
@@ -31,7 +30,6 @@ public class UserService {
     public Response getUser(
             @ApiParam(name = "id",value = "int",required = true)
             @PathParam("param") int id){
-        System.out.println("---------------");
         User user = userMapper.getUserById(id);
         if(user == null){
             return Response.status(Response.Status.NOT_FOUND).build();

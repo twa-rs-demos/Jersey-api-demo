@@ -11,21 +11,25 @@ import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest extends TestBase {
     String basePath = "/user";
 
-    User user = new User();
+    User user = mock(User.class);
 
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        user.setEmail("test2@qq.com");
-        user.setId(1);
-        user.setMobilePhone("18087839393");
+        when(userMapper.getUserByEmail("test2@qq.com")).thenReturn(user);
+        when(userMapper.getUserByMobilePhone("18087839393")).thenReturn(user);
+        when(user.getEmail()).thenReturn("test2@qq.com");
+        when(user.getId()).thenReturn(2);
+        when(user.getMobilePhone()).thenReturn("18087839393");
+
     }
 
     @Test
@@ -45,7 +49,6 @@ public class UserServiceTest extends TestBase {
 
     @Test
     public void should_return_one_user_by_mobilePhone() {
-        when(userMapper.getUserByMobilePhone("18087839393")).thenReturn(user);
         Response response = target(basePath + "/mobilePhone/18087839393").request().get();
 
         assertThat(response.getStatus(), is(200));
@@ -53,17 +56,15 @@ public class UserServiceTest extends TestBase {
         assertThat(result.get("email"), is("test2@qq.com"));
         assertThat(result.get("mobilePhone"), is(user.getMobilePhone()));
         assertThat(result.get("id"), is(user.getId()));
-//        assertThat(response.getEntity());
     }
 
     @Test
     public void should_return_one_user_by_email() {
-        when(userMapper.getUserByEmail("test2@qq.com")).thenReturn(user);
         Response response = target(basePath + "/email/test2@qq.com").request().get();
         assertThat(response.getStatus(), is(200));
         Map result = response.readEntity(Map.class);  //打印出从数据库找到的user
-        assertThat(result.get("email"), is("test2@qq.com"));
-        assertThat(result.get("mobilePhone"), is(user.getMobilePhone()));
-        assertThat(result.get("id"), is(user.getId()));
+        assertThat( result.get("email"), is("test2@qq.com"));
+        assertThat( result.get("mobilePhone"), is("18087839393"));
+        assertThat( result.get("id"), is(2));
     }
 }
