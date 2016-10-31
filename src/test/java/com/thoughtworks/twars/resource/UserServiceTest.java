@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.User;
+import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,5 +67,44 @@ public class UserServiceTest extends TestBase {
         assertThat( result.get("email"), is("test2@qq.com"));
         assertThat( result.get("mobilePhone"), is("18087839393"));
         assertThat( result.get("id"), is(2));
+    }
+
+    @Test
+    public void should_return_user_detail_by_user_id() throws Exception {
+
+        UserDetail theDetail = mock(UserDetail.class);
+
+        when(userMapper.getUserDetailById(1)).thenReturn(theDetail);
+        when(userMapper.getUserById(1)).thenReturn(user);
+        when(user.getMobilePhone()).thenReturn("123456");
+        when(user.getEmail()).thenReturn("11@qq.com");
+
+        when(theDetail.getUserId()).thenReturn(1);
+        when(theDetail.getSchool()).thenReturn("哈佛");
+        when(theDetail.getMajor()).thenReturn("宗教");
+        when(theDetail.getDegree()).thenReturn("博士");
+        when(theDetail.getName()).thenReturn("狗剩");
+        when(theDetail.getGender()).thenReturn("男");
+        when(theDetail.getSchoolProvince()).thenReturn("陕西");
+        when(theDetail.getSchoolCity()).thenReturn("西安");
+        when(theDetail.getEntranceYear()).thenReturn("2016");
+
+        Response response = target(basePath + "/1/detail").request().get();
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+
+        assertThat(result.get("userId"), is(1));
+        assertThat(result.get("school"), is("哈佛"));
+        assertThat(result.get("major"), is("宗教"));
+        assertThat(result.get("degree"), is("博士"));
+        assertThat(result.get("name"), is("狗剩"));
+        assertThat(result.get("gender"), is("男"));
+        assertThat(result.get("mobilePhone"), is("123456"));
+        assertThat(result.get("email"), is("11@qq.com"));
+        assertThat(result.get("schoolProvince"), is("陕西"));
+        assertThat(result.get("schoolCity"), is("西安"));
+        assertThat(result.get("entranceYear"), is("2016"));
     }
 }
