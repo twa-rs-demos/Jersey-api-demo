@@ -11,7 +11,7 @@ function initMysql(){
   echo "the password of root:"
   sql=$(cat $BASE_DIR/mysql-init.sql)
   read -s password
-  docker exec -it $CONTAINER mysql -u root -pthoughtworks -e "$sql"
+  docker exec -it $CONTAINER mysql -u root -p$password -e "$sql"
 }
 
 
