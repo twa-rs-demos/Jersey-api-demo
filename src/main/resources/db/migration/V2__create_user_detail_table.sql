@@ -1,4 +1,4 @@
-CREATE TABLE userInfo (
+CREATE TABLE userDetail (
     userId INT UNIQUE NOT NULL,
     school VARCHAR(128) NOT NULL,
     name VARCHAR(128) NOT NULL,
