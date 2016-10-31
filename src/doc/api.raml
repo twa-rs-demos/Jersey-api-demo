@@ -2,8 +2,57 @@
 title: jersey-user-demo API
 version: V1
 baseUri: http://127.0.0.1:8080/jersey-user-demo
+/register:
+  post:
+    body:
+        properties:
+          mobilePhone: string
+          email: string
+          password: string
+    responses:
+      201:
+        body:
+          application/json:
+            properties:
+              id: number
+              user:
+                properties:
+                  uri: string
+              userInfo:
+                properties:
+                  uri: string
+
 /user:
   description： 通过不同方式查找用户
+  /{id}:
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  id: integer
+                  email: string
+                  mobilePhone: string
+
+  /detail:
+        get:
+          description: 获取用户信息
+          body:
+            application/json:
+              properties:
+                userId: integer
+                school: string
+                name: string
+                gender: string
+                major: string
+                degree: string
+                birthday: integer
+                email: string
+                mobilePhone: string
+        
+
+
   /mobilePhone/{mobilePhone}:
     description：|
       通过电话号码，获取用户信息，

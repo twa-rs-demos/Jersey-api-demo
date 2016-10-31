@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.UserDetail;
 import com.thoughtworks.twars.mapper.UserMapper;
 import com.wordnik.swagger.annotations.ApiParam;
 import com.wordnik.swagger.annotations.ApiResponse;
@@ -95,7 +96,35 @@ public class UserService {
         return Response.status(Response.Status.OK).entity(map).build();
     }
 
+    @GET
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one userDetail successful"),
+            @ApiResponse(code = 404, message = "get one userDetail user failed")})
+    @Path("/{param}/detail")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserDetail(
+            @io.swagger.annotations.ApiParam(name = "userId", value = "int", required = true)
+            @PathParam("param") int userId) {
 
+        UserDetail detail = userMapper.getUserDetailById(userId);
+        User user = userMapper.getUserById(userId);
 
+        if (null == user || null == detail) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
 
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", detail.getUserId());
+        map.put("school", detail.getSchool());
+        map.put("major", detail.getMajor());
+        map.put("degree", detail.getDegree());
+        map.put("name", detail.getName());
+        map.put("gender", detail.getGender());
+        map.put("email", user.getEmail());
+        map.put("mobilePhone", user.getMobilePhone());
+        map.put("schoolProvince",detail.getSchoolProvince());
+        map.put("schoolCity", detail.getSchoolCity());
+        map.put("entranceYear", detail.getEntranceYear());
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
 }

@@ -3,16 +3,38 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.UserMapper">
+    <resultMap id="userDetailMap" type="com.thoughtworks.twars.bean.UserDetail">
+        <id property="userId" column="userId"></id>
+        <result column="school" property="school"></result>
+        <result column="name" property="name"></result>
+        <result column="major" property="major"></result>
+        <result column="degree" property="degree"></result>
+        <result column="gender" property="gender"></result>
+        <result column="schoolProvince" property="schoolProvince"></result>
+        <result column="schoolCity" property="schoolCity"></result>
+        <result column="entranceYear" property="entranceYear"></result>
+    </resultMap>
+
+    <resultMap id="userMap" type="com.thoughtworks.twars.bean.User">
+        <id property="id" column="id"></id>
+        <result column="email" property="email"></result>
+        <result column="mobilePhone" property="mobilePhone"></result>
+    </resultMap>
+
+    <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
+        select * from users where id = #{id}
+    </select>
+
+    <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">
+        SELECT * FROM userDetail WHERE userId = #{userId};
+    </select>
+
     <select id="getUserByMobilePhone" resultType="com.thoughtworks.twars.bean.User">
         select * from users where mobilePhone = #{mobilePhone}
     </select>
 
     <select id="getUserByEmail" resultType="com.thoughtworks.twars.bean.User">
         select * from users where email = #{email}
-    </select>
-
-    <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
-        select * from users where id = #{id}
     </select>
 
     <insert id="insertUser" parameterType="com.thoughtworks.twars.bean.User" useGeneratedKeys="true" keyProperty="id">
