@@ -49,7 +49,7 @@ public class UserMapperTest extends TestBase{
         user.setPassword("1234567");
         userMapper.insertUser(user);
 
-        //// FIXME: 16-10-27 no such method of assertThat
+        assertThat(user.getId(), is(Integer.valueOf(7)));
         assertEquals(user.getId(),7);
     }
 

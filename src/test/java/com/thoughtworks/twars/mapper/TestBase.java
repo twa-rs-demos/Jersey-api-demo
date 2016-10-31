@@ -20,7 +20,6 @@ public class TestBase {
     @Before
     public void setUp() throws Exception {
         session.startManagedSession();
-        // FIXME: 16-10-27 unknown database 'UserDB'
         flyway.clean();
         flyway.migrate();
     }
