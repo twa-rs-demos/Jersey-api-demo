@@ -14,5 +14,6 @@ public interface UserMapper {
 
     UserDetail getUserDetailById(int userId);
 
+    int updateUserDetail(UserDetail detail);
 
 }

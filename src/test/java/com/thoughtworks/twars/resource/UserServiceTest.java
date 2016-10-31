@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Map;
 
@@ -106,5 +108,23 @@ public class UserServiceTest extends TestBase {
         assertThat(result.get("schoolProvince"), is("陕西"));
         assertThat(result.get("schoolCity"), is("西安"));
         assertThat(result.get("entranceYear"), is("2016"));
+    }
+
+    @Test
+    public void should_update_user_detail() throws Exception {
+        UserDetail updateUserDetail = new UserDetail();
+
+        updateUserDetail.setUserId(2);
+
+        Entity<UserDetail> entityUserDetail = Entity.entity(updateUserDetail,
+                MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/2/detail").request().put
+                (entityUserDetail);
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+        assertThat(result.get("uri"), is("userDetail/2"));
+
     }
 }

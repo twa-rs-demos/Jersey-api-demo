@@ -68,4 +68,25 @@ public class UserMapperTest extends TestBase{
         assertThat(detail.getEntranceYear(),is("2016"));
     }
 
+    @Test
+    public void should_insert_user_detail() throws Exception {
+        UserDetail userDetail = new UserDetail();
+
+        userDetail.setGender("F");
+        userDetail.setDegree("benke");
+        userDetail.setSchool("shannxi");
+        userDetail.setUserId(5);
+        userDetail.setMajor("sc");
+        userDetail.setName("purple");
+        userDetail.setSchoolProvince("陕西");
+        userDetail.setSchoolCity("西安");
+        userDetail.setEntranceYear("2015");
+
+        userMapper.updateUserDetail(userDetail);
+
+        assertThat(userDetail.getUserId(),is(5));
+        assertThat(userDetail.getSchoolProvince(), is("陕西"));
+        assertThat(userDetail.getEntranceYear(), is("2015"));
+    }
+
 }

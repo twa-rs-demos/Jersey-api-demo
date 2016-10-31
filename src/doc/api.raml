@@ -50,8 +50,25 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
                 birthday: integer
                 email: string
                 mobilePhone: string
-        
-
+        put:
+          description: 提交用户的详细信息
+          body:
+            application/json:
+              properties:
+                userId: integer
+                school: string
+                name: string
+                gender: string
+                major: string
+                degree: string
+          responses:
+            200:
+              body:
+                application/json:
+                  properties:
+                    userInfo:
+                      properties:
+                        uri: string
 
   /mobilePhone/{mobilePhone}:
     description：|

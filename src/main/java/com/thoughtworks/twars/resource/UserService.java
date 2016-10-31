@@ -7,10 +7,7 @@ import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
@@ -124,6 +121,24 @@ public class UserService {
         map.put("schoolProvince",detail.getSchoolProvince());
         map.put("schoolCity", detail.getSchoolCity());
         map.put("entranceYear", detail.getEntranceYear());
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+    @PUT
+    @Path("/{param}/detail")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "update one userDetail successful")})
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUserDetail(
+            @ApiParam(name = "userId", value = "int", required = true)
+            @PathParam("param") int userId,
+            UserDetail userDetail
+    ) {
+        userMapper.updateUserDetail(userDetail);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("uri", "userDetail/" + userDetail.getUserId());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }

@@ -25,6 +25,11 @@
         select * from users where id = #{id}
     </select>
 
+    <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true"
+            keyProperty="userId">
+        REPLACE INTO userDetail(userId,name,major,school,gender,degree,schoolProvince,schoolCity,entranceYear) values(#{userId}, #{name},#{major}, #{school}, #{gender}, #{degree},#{schoolProvince},#{schoolCity},#{entranceYear})
+    </insert>
+
     <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">
         SELECT * FROM userDetail WHERE userId = #{userId};
     </select>
