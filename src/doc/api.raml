@@ -41,6 +41,17 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
                 properties:
                   uri: string
 
+/logout:
+  post:
+    headers:
+      token: string
+    body:
+      application/json:
+        properties:
+          userId: number
+    responses:
+      201:
+
 /user:
   description： 通过不同方式查找用户
   /{id}:
