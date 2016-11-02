@@ -22,6 +22,25 @@ baseUri: http://127.0.0.1:8080/jersey-user-demo
                 properties:
                   uri: string
 
+/login:
+  post:
+    body:
+      application/x-www-form-urlencoded:
+        properties:
+          email/mobilePhone: string
+          password: string
+    responses:
+      200:
+        headers:
+          token: string
+        body:
+          application/json:
+            properties:
+              id: number
+              userInfo:
+                properties:
+                  uri: string
+
 /user:
   description： 通过不同方式查找用户
   /{id}:

@@ -13,6 +13,10 @@ public interface UserMapper {
 
     User getUserByEmail(String email);
 
+    User getUserByEmailAndPassWord(User user);
+
+    User getUserByMobilePhoneAndPassWord(User user);
+
     UserDetail getUserDetailById(int userId);
 
     int updateUserDetail(UserDetail detail);
